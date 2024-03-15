@@ -30,6 +30,13 @@ RSpec.describe StaySegment do
 
   describe '.parse' do
     it 'creates a new StaySegment instance from a line of text' do
+      line = 'Hotel BCN 2023-01-05 -> 2023-01-10'
+      stay_segment = StaySegment.parse(line)
+
+      expect(stay_segment.type).to eq('Hotel')
+      expect(stay_segment.at).to eq('BCN')
+      expect(stay_segment.from_date).to eq(Date.parse('2023-01-05'))
+      expect(stay_segment.to_date).to eq(Date.parse('2023-01-10'))
     end
   end
 end

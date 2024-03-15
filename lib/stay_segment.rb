@@ -33,5 +33,10 @@ class StaySegment
   # @example
   #   StaySegment.parse("Hotel BCN 2023-01-05 -> 2023-01-10")
   def self.parse(line)
+    attrs = line.split(' ').reject { |str| str == '->' }
+    attr_keys = %i[type at from_date to_date]
+    params = attr_keys.zip(attrs).to_h
+
+    new(params:)
   end
 end
