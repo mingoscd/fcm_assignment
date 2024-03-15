@@ -40,9 +40,22 @@ RSpec.describe ItineraryService do
         ARGV.replace ['input.txt']
       end
 
+      let(:segment_parser) { instance_double(SegmentParser) }
+      let(:segment_grouping) { instance_double(SegmentGrouping) }
+      let(:trips) { [instance_double(Trip)] }
+
       it 'calls fetch_trips' do
         expect(subject).to receive(:fetch_trips)
         subject.generate_itinerary
+      end
+
+      it 'returns the generated itinerary' do
+        allow(SegmentParser).to receive(:new).and_return(segment_parser)
+        allow(segment_parser).to receive(:segments)
+        allow(SegmentGrouping).to receive(:new).and_return(segment_grouping)
+        allow(segment_grouping).to receive(:trips).and_return(trips)
+
+        expect(subject.generate_itinerary).to eq(trips)
       end
     end
   end

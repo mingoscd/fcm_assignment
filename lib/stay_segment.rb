@@ -19,6 +19,8 @@ class StaySegment
     @to_date = Date.parse(params[:to_date])
   end
 
+  def category = 'stay'
+
   # Returns a string representation of the StaySegment.
   #
   # @return [String] A string representing the StaySegment.

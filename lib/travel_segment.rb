@@ -26,6 +26,8 @@ class TravelSegment
     @end_datetime = calculate_end_datetime(params)
   end
 
+  def category = 'travel'
+
   # Returns a string representation of the TravelSegment.
   #
   # @return [String] A string representing the TravelSegment.
