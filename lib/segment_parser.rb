@@ -7,15 +7,14 @@ class SegmentParser
 
   SEGMENT_START = 'SEGMENT:'
 
-  attr_reader :file
-  attr_accessor :segments
+  attr_reader :segments
 
   # Initializes a new SegmentParser instance and parses segments from the input file.
   #
   # @param [String] path The path to the input file.
   # @return [SegmentParser] A new instance of SegmentParser.
   def initialize(path:)
-    @segments = parse_segments(path)
+    @segments = parse_file(path)
   end
 
   private
@@ -24,21 +23,24 @@ class SegmentParser
   #
   # @param [String] path The path to the input file.
   # @return [Array<TravelSegment, StaySegment>] An array of parsed segments.
-  def parse_segments(path)
+  def parse_file(path)
     segments = []
 
-    File.open(path).each_line do |line|
-      segments << parse_segment(line) if line.start_with?(SEGMENT_START)
+    File.foreach(path) do |line|
+      segments << parse_line(line) if line.start_with?(SEGMENT_START)
     end
 
     segments
+  rescue Errno::ENOENT
+    puts "Error: File not found at #{path}"
+    []
   end
 
   # Parses a segment from a line of text.
   #
   # @param [String] line The line of text containing the segment information.
   # @return [TravelSegment, StaySegment] A parsed segment.
-  def parse_segment(line)
+  def parse_line(line)
     line.gsub!(SEGMENT_START, '')
     segment_type = line.split(' ').first.downcase
 

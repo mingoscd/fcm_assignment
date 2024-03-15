@@ -13,21 +13,20 @@ class ItineraryService
   #
   # @return [Array<Trip>] An array of Trip objects representing the generated itinerary.
   def generate_itinerary
-    return print_error_message if invalid_args?
-
-    fetch_trips
+    invalid_args? ? print_error_message : fetch_trips
   end
 
   private
 
   def invalid_args?
-    path.nil? || based.nil?
+    path.nil? || !File.exist?(path) || based.nil?
   end
 
   def print_error_message
     puts 'Provide the path of the input file' if path.nil?
     puts 'Provide the BASED argument' if based.nil?
-    puts 'Example: BASED=SVQ bundle exec ruby main.rb input.txt'
+    puts 'The file provided does not exists' if path && !File.exist?(path)
+    puts 'Usage example: BASED=SVQ bundle exec ruby main.rb input.txt'
   end
 
   def fetch_trips

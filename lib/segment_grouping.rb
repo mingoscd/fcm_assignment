@@ -74,7 +74,7 @@ class SegmentGrouping
   # @return [TravelSegment, nil] The initial travel segment matching the origin, or nil if not found.
   def find_initial_return_segment(from:, remaining_segments:)
     initial_segment = remaining_segments.find { |s| s.from == from }
-    remaining_segments.reject! { |s| s == initial_segment }
+    remaining_segments.delete(initial_segment) if initial_segment
 
     initial_segment
   end
