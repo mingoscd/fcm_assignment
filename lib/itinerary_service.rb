@@ -30,7 +30,7 @@ class ItineraryService
   end
 
   def fetch_trips
-    segments = SegmentParser.new(path:).segments
-    SegmentGrouping.new(segments:, based:).trips
+    segments = SegmentParser.new(path: path).segments
+    SegmentGrouping.new(segments: segments, based: based).trips
   end
 end

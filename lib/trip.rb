@@ -37,9 +37,9 @@ class Trip
     new(
       origin: departure_segments.first.from,
       destination: departure_segments.last.to,
-      departure_segments:,
-      return_segments:,
-      stay_segments:
+      departure_segments: departure_segments,
+      return_segments: return_segments,
+      stay_segments: stay_segments
     )
   end
 

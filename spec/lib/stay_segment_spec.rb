@@ -12,7 +12,7 @@ RSpec.describe StaySegment do
 
   describe '#initialize' do
     it 'sets type, at, from_date, to_date' do
-      stay_segment = StaySegment.new(params:)
+      stay_segment = StaySegment.new(params: params)
 
       expect(stay_segment.type).to eq('hotel')
       expect(stay_segment.at).to eq('BCN')
@@ -23,7 +23,7 @@ RSpec.describe StaySegment do
 
   describe '#to_s' do
     it 'returns a string representation of the StaySegment' do
-      stay_segment = StaySegment.new(params:)
+      stay_segment = StaySegment.new(params: params)
       expect(stay_segment.to_s).to eq("Hotel at BCN on 2023-01-05 to 2023-01-10\n")
     end
   end

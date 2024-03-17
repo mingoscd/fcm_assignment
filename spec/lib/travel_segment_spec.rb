@@ -14,7 +14,7 @@ RSpec.describe TravelSegment do
 
   describe '#initialize' do
     it 'sets type, from, to, date, start_datetime, end_datetime' do
-      travel_segment = TravelSegment.new(params:)
+      travel_segment = TravelSegment.new(params: params)
 
       expect(travel_segment.type).to eq('flight')
       expect(travel_segment.from).to eq('SVQ')
@@ -27,7 +27,7 @@ RSpec.describe TravelSegment do
 
   describe '#to_s' do
     it 'returns a string representation of the TravelSegment' do
-      travel_segment = TravelSegment.new(params:)
+      travel_segment = TravelSegment.new(params: params)
       expect(travel_segment.to_s).to eq("Flight from SVQ to BCN at 2023-03-02 06:40 to 09:10\n")
     end
 

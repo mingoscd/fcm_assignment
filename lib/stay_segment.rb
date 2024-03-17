@@ -39,6 +39,6 @@ class StaySegment
     attr_keys = %i[type at from_date to_date]
     params = attr_keys.zip(attrs).to_h
 
-    new(params:)
+    new(params: params)
   end
 end

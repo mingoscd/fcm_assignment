@@ -46,7 +46,7 @@ class TravelSegment
     attr_keys = %i[type from date start_time to end_time]
     params = attr_keys.zip(attr_values).to_h
 
-    new(params:)
+    new(params: params)
   end
 
   private

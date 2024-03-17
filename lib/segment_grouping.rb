@@ -42,11 +42,16 @@ class SegmentGrouping
   # @return [Trip] A Trip object representing the grouped trip.
   def group_trip_segments(based_segment, remaining_segments)
     departure_segments = find_segment_path(based_segment, remaining_segments)
-    return_init_segment = find_initial_return_segment(from: departure_segments.last.to, remaining_segments:)
+    return_init_segment = find_initial_return_segment(from: departure_segments.last.to,
+                                                      remaining_segments: remaining_segments)
     return_segments = return_init_segment ? find_segment_path(return_init_segment, remaining_segments) : []
     stay_segments = select_stay_segments(departure_segments.last, return_segments.first)
 
-    Trip.from_segments(departure_segments:, stay_segments:, return_segments:)
+    Trip.from_segments(
+      departure_segments: departure_segments,
+      stay_segments: stay_segments,
+      return_segments: return_segments
+    )
   end
 
   # Selects travel segments that are consecutive to the starting segment.
