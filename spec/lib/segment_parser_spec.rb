@@ -28,7 +28,8 @@ RSpec.describe SegmentParser do
   let(:input_path) { 'input.txt' }
 
   before do
-    allow(File).to receive(:open).with(input_path).and_return(file_content)
+    consecutive_yields = allow(File).to receive(:foreach).with(input_path)
+    file_content.lines.each { |line| consecutive_yields.and_yield(line) }
   end
 
   describe '#initialize' do
